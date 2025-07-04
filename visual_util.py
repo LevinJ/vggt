@@ -376,7 +376,7 @@ def segment_sky(image_path, onnx_session, mask_filename=None):
         np.ndarray: Binary mask where 255 indicates non-sky regions
     """
 
-    assert mask_filename is not None
+    # assert mask_filename is not None
     image = cv2.imread(image_path)
 
     result_map = run_skyseg(onnx_session, [320, 320], image)
@@ -388,8 +388,9 @@ def segment_sky(image_path, onnx_session, mask_filename=None):
     output_mask = np.zeros_like(result_map_original)
     output_mask[result_map_original < 32] = 255  # Use threshold of 32
 
-    os.makedirs(os.path.dirname(mask_filename), exist_ok=True)
-    cv2.imwrite(mask_filename, output_mask)
+    if mask_filename is not None:
+        os.makedirs(os.path.dirname(mask_filename), exist_ok=True)
+        cv2.imwrite(mask_filename, output_mask)
     return output_mask
 
 

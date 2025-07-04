@@ -147,3 +147,12 @@ skyseg.onnx
 # pixi environments
 .pixi
 *.egg-info
+
+# Ignore input_images_* folders
+input_images_*
+
+# Ignore additional folders
+.gradio/
+.vscode/
+sparse/
+splat/
